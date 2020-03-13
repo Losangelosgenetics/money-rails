@@ -82,4 +82,44 @@ RSpec.configure do |config|
   config.include FileHelpers
   config.include LogHelpers
   config.raise_errors_for_deprecations!
+ENV["RAILS_ENV"] = 'test'
+# Require dummy Rails app
+require File.expand_path("../../spec/dummy/config/environment", __FILE__)
+
+require 'database_cleaner'
+require 'rspec/rails'
+
+# Requires supporting ruby files with custom matchers and macros, etc,
+# in spec/support/ and its subdirectories.
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+
+# Silence warnings
+if Money.respond_to?(:silence_core_extensions_deprecations=)
+  Money.silence_core_extensions_deprecations = true
+end
+
+RSpec.configure do |config|
+ENV["RAILS_ENV"] = 'test'
+
+# Require dummy Rails app
+require File.expand_path("../../spec/dummy/config/environment", __FILE__)
+
+require 'rspec/rails'
+require 'rspec/autorun'
+
+# Requires supporting ruby files with custom matchers and macros, etc,
+# in spec/support/ and its subdirectories.
+Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
+RSpec.configure do |config|
+  # If you're not using ActiveRecord, or you'd prefer not to run each of your
+  # examples within a transaction, remove the following line or assign false
+  # instead of true.
+  config.use_transactional_fixtures = true
+
+  # If true, the base class of anonymous controllers will be inferred
+  # automatically. This will be the default behavior in future versions of
+  # rspec-rails.
+  config.infer_base_class_for_anonymous_controllers = false
+  config.infer_spec_type_from_file_location!
 end
