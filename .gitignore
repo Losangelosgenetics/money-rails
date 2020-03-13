@@ -15,3 +15,26 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
+# Bundler
+.bundle
+Gemfile.lock
+pkg/*
+bin/
+
+# Rubinius
+*.rbc
+
+# YARD
+.yardoc
+yardoc/
+doc/
+
+# Project
+.rbenv-version
+.rbx
+.rvmrc
+.ruby-version
+.ruby-gemset
+
+# Spec artifacts
+/coverage
